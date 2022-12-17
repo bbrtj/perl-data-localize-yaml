@@ -40,11 +40,13 @@ jobs:
       run: |
         perl -v
         cpanm -v
-
     - name: Install Test::More
       if:  ${{ startsWith( matrix.perl, '5.10') }}
       run: |
         cpanm --notest Test::More
+    - name: Install dependencies
+      run: |
+        cpanm --installdeps --notest .
     - name: Show Errors on Windows
       if:  ${{ failure() && startsWith( matrix.runner, 'windows-') }}
       run: |
